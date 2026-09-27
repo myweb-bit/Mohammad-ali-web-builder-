@@ -1,0 +1,4687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#030712">
+<meta name="description" content="Professional modern websites for businesses starting at ₹2,200. Mobile-friendly, premium and customized web experiences by Muhammad Ali Khan.">
+
+<meta property="og:title" content="Premium Website Builder | Muhammad Ali Khan">
+<meta property="og:description" content="Modern, premium and mobile-friendly websites for businesses starting at ₹2,200.">
+<meta property="og:type" content="website">
+
+<title>Premium Website Builder | Muhammad Ali Khan</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root{
+    --bg:#030712;
+    --bg2:#070b14;
+    --bg3:#0b1020;
+    --text:#f5f7fb;
+    --muted:#8f99aa;
+    --muted2:#647084;
+    --line:rgba(255,255,255,.09);
+    --line2:rgba(255,255,255,.05);
+    --blue:#5b8cff;
+    --indigo:#7467ff;
+    --violet:#a56cff;
+    --cyan:#55d9ff;
+    --green:#54e7a3;
+    --gold:#e9c77a;
+
+    --nav-h:76px;
+    --ease:cubic-bezier(.16,1,.3,1);
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:auto;
+    background:var(--bg);
+}
+
+body{
+    background:
+        radial-gradient(circle at 75% 8%,rgba(82,95,255,.10),transparent 25%),
+        radial-gradient(circle at 10% 45%,rgba(86,63,255,.06),transparent 28%),
+        var(--bg);
+    color:var(--text);
+    font-family:"Plus Jakarta Sans",sans-serif;
+    overflow-x:hidden;
+    min-height:100vh;
+}
+
+body.menu-open{
+    overflow:hidden;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button{
+    font:inherit;
+}
+
+img{
+    max-width:100%;
+    display:block;
+}
+
+::selection{
+    background:#ffffff;
+    color:#030712;
+}
+
+/* =========================================================
+   GLOBAL BACKGROUND
+========================================================= */
+
+.site-world{
+    position:fixed;
+    inset:0;
+    z-index:-20;
+    pointer-events:none;
+    overflow:hidden;
+}
+
+.world-glow{
+    position:absolute;
+    width:50vw;
+    height:50vw;
+    max-width:750px;
+    max-height:750px;
+    border-radius:50%;
+    filter:blur(100px);
+    opacity:.10;
+    transition:
+        transform 1.4s var(--ease),
+        opacity 1s ease,
+        background 1s ease;
+}
+
+.world-glow.one{
+    top:-20%;
+    right:-10%;
+    background:#526cff;
+}
+
+.world-glow.two{
+    left:-20%;
+    top:35%;
+    background:#743cff;
+    opacity:.055;
+}
+
+.world-glow.three{
+    right:10%;
+    bottom:-30%;
+    background:#1f8cff;
+    opacity:.045;
+}
+
+.grid-world{
+    position:absolute;
+    inset:0;
+    opacity:.035;
+    background-image:
+        linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);
+    background-size:70px 70px;
+    mask-image:linear-gradient(to bottom,black,transparent 80%);
+}
+
+.noise{
+    position:fixed;
+    inset:0;
+    z-index:100;
+    pointer-events:none;
+    opacity:.026;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+}
+
+.cursor-dot,
+.cursor-ring{
+    position:fixed;
+    top:0;
+    left:0;
+    pointer-events:none;
+    z-index:1000;
+    transform:translate(-50%,-50%);
+    opacity:0;
+}
+
+.cursor-dot{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:#fff;
+    box-shadow:0 0 20px rgba(111,142,255,.9);
+}
+
+.cursor-ring{
+    width:34px;
+    height:34px;
+    border:1px solid rgba(255,255,255,.4);
+    border-radius:50%;
+    transition:
+        width .35s var(--ease),
+        height .35s var(--ease),
+        background .35s ease,
+        border .35s ease;
+}
+
+.cursor-ring.view{
+    width:76px;
+    height:76px;
+    background:rgba(91,140,255,.12);
+    border-color:rgba(145,164,255,.7);
+}
+
+.cursor-ring.view::after{
+    content:"VIEW";
+    position:absolute;
+    inset:0;
+    display:grid;
+    place-items:center;
+    font:600 9px "Space Grotesk";
+    letter-spacing:.16em;
+}
+
+/* =========================================================
+   SCROLL BAR
+========================================================= */
+
+.scroll-progress{
+    position:fixed;
+    top:0;
+    left:0;
+    width:0%;
+    height:2px;
+    z-index:999;
+    background:linear-gradient(90deg,var(--blue),var(--violet),var(--cyan));
+    box-shadow:0 0 15px rgba(91,140,255,.8);
+}
+
+/* =========================================================
+   NAV
+========================================================= */
+
+.nav{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    height:var(--nav-h);
+    z-index:500;
+    display:flex;
+    align-items:center;
+    transition:
+        height .5s var(--ease),
+        background .5s ease,
+        border .5s ease;
+}
+
+.nav.scrolled{
+    height:64px;
+    background:rgba(3,7,18,.68);
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
+    border-bottom:1px solid var(--line2);
+}
+
+.nav-inner{
+    width:min(1240px,calc(100% - 44px));
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:30px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    font-family:"Space Grotesk",sans-serif;
+    font-weight:700;
+    letter-spacing:-.04em;
+}
+
+.logo-mark{
+    width:34px;
+    height:34px;
+    border:1px solid rgba(255,255,255,.22);
+    border-radius:10px;
+    display:grid;
+    place-items:center;
+    position:relative;
+    overflow:hidden;
+    background:rgba(255,255,255,.03);
+}
+
+.logo-mark::before{
+    content:"";
+    position:absolute;
+    width:15px;
+    height:15px;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--blue),var(--violet));
+    filter:blur(4px);
+}
+
+.logo-mark span{
+    position:relative;
+    z-index:1;
+    font-size:10px;
+}
+
+.logo-name{
+    font-size:14px;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:31px;
+    margin-left:auto;
+}
+
+.nav-links a{
+    color:#8f98aa;
+    font-size:12px;
+    font-weight:600;
+    position:relative;
+    transition:color .3s ease;
+}
+
+.nav-links a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-7px;
+    width:0;
+    height:1px;
+    background:#fff;
+    transition:width .35s var(--ease);
+}
+
+.nav-links a:hover{
+    color:#fff;
+}
+
+.nav-links a:hover::after{
+    width:100%;
+}
+
+.nav-price{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    border:1px solid rgba(255,255,255,.13);
+    background:rgba(255,255,255,.045);
+    padding:10px 14px;
+    border-radius:100px;
+    font-size:11px;
+    font-weight:700;
+    transition:.35s var(--ease);
+}
+
+.nav-price:hover{
+    transform:translateY(-2px);
+    border-color:rgba(119,142,255,.5);
+    background:rgba(91,140,255,.08);
+}
+
+.menu-toggle{
+    display:none;
+    width:44px;
+    height:44px;
+    border:1px solid var(--line);
+    border-radius:50%;
+    background:rgba(255,255,255,.035);
+    color:#fff;
+    cursor:pointer;
+}
+
+.menu-toggle span{
+    display:block;
+    width:17px;
+    height:1px;
+    background:#fff;
+    margin:4px auto;
+    transition:.35s var(--ease);
+}
+
+.menu-toggle.active span:first-child{
+    transform:translateY(2.5px) rotate(45deg);
+}
+
+.menu-toggle.active span:last-child{
+    transform:translateY(-2.5px) rotate(-45deg);
+}
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+.mobile-menu{
+    position:fixed;
+    inset:0;
+    z-index:450;
+    background:
+        radial-gradient(circle at 80% 15%,rgba(86,108,255,.15),transparent 32%),
+        #030712;
+    padding:110px 28px 30px;
+    transform:translateY(-105%);
+    transition:transform .8s var(--ease);
+}
+
+.mobile-menu.open{
+    transform:translateY(0);
+}
+
+.mobile-menu-links{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.mobile-menu-links a{
+    font:600 clamp(36px,12vw,68px)/1 "Space Grotesk";
+    letter-spacing:-.065em;
+    padding:10px 0;
+    color:#e7eaf1;
+}
+
+.mobile-menu-footer{
+    position:absolute;
+    bottom:30px;
+    left:28px;
+    right:28px;
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    color:#697386;
+    font-size:11px;
+}
+
+/* =========================================================
+   GENERAL
+========================================================= */
+
+main{
+    position:relative;
+    z-index:2;
+}
+
+section{
+    position:relative;
+}
+
+.container{
+    width:min(1240px,calc(100% - 44px));
+    margin:auto;
+}
+
+.eyebrow{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#8d98ad;
+    font:600 10px/1 "Space Grotesk";
+    letter-spacing:.18em;
+    text-transform:uppercase;
+}
+
+.eyebrow::before{
+    content:"";
+    width:26px;
+    height:1px;
+    background:linear-gradient(90deg,var(--blue),transparent);
+}
+
+.section-heading{
+    font:600 clamp(44px,6.2vw,88px)/.94 "Space Grotesk";
+    letter-spacing:-.065em;
+    max-width:850px;
+}
+
+.section-heading .dim{
+    color:#555f71;
+}
+
+.reveal{
+    opacity:0;
+    transform:translateY(45px);
+    filter:blur(7px);
+    transition:
+        opacity 1s var(--ease),
+        transform 1s var(--ease),
+        filter 1s var(--ease);
+}
+
+.reveal.visible{
+    opacity:1;
+    transform:none;
+    filter:none;
+}
+
+.split-line{
+    overflow:hidden;
+}
+
+.split-line > span{
+    display:block;
+    transform:translateY(110%);
+    transition:transform 1.1s var(--ease);
+}
+
+.visible .split-line > span{
+    transform:none;
+}
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    min-height:52px;
+    padding:0 21px;
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:100px;
+    background:rgba(255,255,255,.055);
+    color:#fff;
+    font:700 11px "Space Grotesk";
+    letter-spacing:.04em;
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
+    transition:
+        transform .45s var(--ease),
+        border .35s ease,
+        background .35s ease;
+}
+
+.btn::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.15),transparent);
+    transform:translateX(-110%);
+    transition:transform .8s var(--ease);
+}
+
+.btn:hover::before{
+    transform:translateX(110%);
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+    border-color:rgba(142,161,255,.55);
+}
+
+.btn-primary{
+    background:#f6f7fb;
+    color:#070a12;
+    border-color:#f6f7fb;
+}
+
+.btn-primary:hover{
+    background:#fff;
+    box-shadow:0 14px 50px rgba(255,255,255,.12);
+}
+
+.btn-arrow{
+    width:25px;
+    height:25px;
+    border-radius:50%;
+    background:rgba(0,0,0,.12);
+    display:grid;
+    place-items:center;
+    transition:transform .4s var(--ease);
+}
+
+.btn:hover .btn-arrow{
+    transform:rotate(-45deg);
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    min-height:100svh;
+    display:flex;
+    align-items:center;
+    padding:120px 0 65px;
+    overflow:hidden;
+}
+
+.hero-canvas{
+    position:absolute;
+    inset:0;
+    z-index:-2;
+}
+
+#webgl{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+}
+
+.hero-vignette{
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(90deg,rgba(3,7,18,.98) 0%,rgba(3,7,18,.73) 34%,rgba(3,7,18,.10) 72%,rgba(3,7,18,.55) 100%),
+        linear-gradient(0deg,var(--bg) 0%,transparent 23%,transparent 80%,rgba(3,7,18,.7) 100%);
+    pointer-events:none;
+}
+
+.hero-content{
+    width:min(1240px,calc(100% - 44px));
+    margin:auto;
+    position:relative;
+    z-index:5;
+}
+
+.hero-copy{
+    max-width:770px;
+}
+
+.hero-label{
+    opacity:0;
+    transform:translateY(20px);
+    animation:heroUp .9s .15s var(--ease) forwards;
+}
+
+.hero-title{
+    margin-top:27px;
+    font:600 clamp(52px,8.4vw,116px)/.86 "Space Grotesk";
+    letter-spacing:-.075em;
+    max-width:940px;
+}
+
+.hero-title .line{
+    display:block;
+    overflow:hidden;
+}
+
+.hero-title .line span{
+    display:block;
+    transform:translateY(110%);
+    animation:titleIn 1.15s var(--ease) forwards;
+}
+
+.hero-title .line:nth-child(1) span{animation-delay:.28s}
+.hero-title .line:nth-child(2) span{animation-delay:.38s}
+.hero-title .line:nth-child(3) span{animation-delay:.48s}
+.hero-title .line:nth-child(4) span{animation-delay:.58s}
+
+.hero-title .gradient{
+    background:linear-gradient(100deg,#fff 10%,#a8baff 55%,#8f6cff);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.hero-desc{
+    max-width:580px;
+    color:#909aab;
+    font-size:15px;
+    line-height:1.8;
+    margin-top:30px;
+    opacity:0;
+    transform:translateY(20px);
+    animation:heroUp .9s .75s var(--ease) forwards;
+}
+
+.hero-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:11px;
+    margin-top:30px;
+    opacity:0;
+    transform:translateY(20px);
+    animation:heroUp .9s .9s var(--ease) forwards;
+}
+
+.hero-meta{
+    margin-top:25px;
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:18px;
+    color:#697386;
+    font:500 10px "Space Grotesk";
+    letter-spacing:.05em;
+    opacity:0;
+    animation:heroUp .9s 1.05s var(--ease) forwards;
+}
+
+.hero-meta span{
+    display:flex;
+    align-items:center;
+    gap:7px;
+}
+
+.hero-meta i{
+    width:4px;
+    height:4px;
+    background:#667cff;
+    border-radius:50%;
+    box-shadow:0 0 8px #667cff;
+}
+
+.hero-price-orb{
+    position:absolute;
+    right:7%;
+    bottom:15%;
+    width:150px;
+    height:150px;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:rgba(255,255,255,.018);
+    backdrop-filter:blur(8px);
+    animation:float 5s ease-in-out infinite;
+}
+
+.hero-price-orb::before{
+    content:"";
+    position:absolute;
+    inset:12px;
+    border:1px solid rgba(108,132,255,.15);
+    border-radius:50%;
+}
+
+.hero-price-orb strong{
+    display:block;
+    font:700 27px "Space Grotesk";
+    letter-spacing:-.06em;
+}
+
+.hero-price-orb small{
+    display:block;
+    text-align:center;
+    color:#687286;
+    font-size:8px;
+    letter-spacing:.15em;
+    margin-top:4px;
+}
+
+.hero-scroll{
+    position:absolute;
+    bottom:32px;
+    right:0;
+    display:flex;
+    align-items:center;
+    gap:11px;
+    color:#566174;
+    font:600 9px "Space Grotesk";
+    letter-spacing:.15em;
+    writing-mode:vertical-rl;
+}
+
+.hero-scroll-line{
+    width:1px;
+    height:50px;
+    background:linear-gradient(#7083ff,transparent);
+    animation:scrollLine 2s ease-in-out infinite;
+}
+
+@keyframes heroUp{
+    to{opacity:1;transform:none}
+}
+
+@keyframes titleIn{
+    to{transform:none}
+}
+
+@keyframes float{
+    0%,100%{transform:translate3d(0,0,0) rotate(0deg)}
+    50%{transform:translate3d(0,-16px,0) rotate(3deg)}
+}
+
+@keyframes scrollLine{
+    0%,100%{transform:scaleY(.35);transform-origin:top}
+    50%{transform:scaleY(1);transform-origin:top}
+}
+
+/* =========================================================
+   MARQUEE
+========================================================= */
+
+.marquee{
+    border-top:1px solid var(--line2);
+    border-bottom:1px solid var(--line2);
+    overflow:hidden;
+    padding:21px 0;
+    background:rgba(255,255,255,.012);
+}
+
+.marquee-track{
+    display:flex;
+    width:max-content;
+    animation:marquee 26s linear infinite;
+}
+
+.marquee-item{
+    display:flex;
+    align-items:center;
+    gap:25px;
+    padding-right:25px;
+    color:#3f4858;
+    font:600 12px "Space Grotesk";
+    letter-spacing:.13em;
+    text-transform:uppercase;
+    white-space:nowrap;
+}
+
+.marquee-item b{
+    color:#69789c;
+}
+
+@keyframes marquee{
+    to{transform:translateX(-50%)}
+}
+
+/* =========================================================
+   SERVICES
+========================================================= */
+
+.services{
+    padding:150px 0 170px;
+}
+
+.services-intro{
+    display:grid;
+    grid-template-columns:1.1fr .8fr;
+    gap:80px;
+    align-items:end;
+    margin-bottom:85px;
+}
+
+.services-note{
+    color:#778195;
+    line-height:1.8;
+    font-size:13px;
+    max-width:380px;
+}
+
+.service-list{
+    border-top:1px solid var(--line);
+}
+
+.service-row{
+    position:relative;
+    display:grid;
+    grid-template-columns:70px 1fr 80px;
+    align-items:center;
+    min-height:105px;
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+    transition:padding .6s var(--ease);
+}
+
+.service-row::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(90deg,rgba(82,112,255,.09),transparent 70%);
+    transform:translateX(-100%);
+    transition:transform .8s var(--ease);
+}
+
+.service-row:hover{
+    padding-left:16px;
+}
+
+.service-row:hover::before{
+    transform:none;
+}
+
+.service-number{
+    position:relative;
+    color:#4d586b;
+    font:500 11px "Space Grotesk";
+}
+
+.service-name{
+    position:relative;
+    font:500 clamp(23px,3vw,38px) "Space Grotesk";
+    letter-spacing:-.045em;
+}
+
+.service-tag{
+    position:relative;
+    justify-self:end;
+    color:#687286;
+    font-size:10px;
+    text-align:right;
+}
+
+.service-arrow{
+    position:relative;
+    position:absolute;
+    right:18px;
+    opacity:0;
+    transform:translateX(-10px);
+    transition:.45s var(--ease);
+}
+
+.service-row:hover .service-arrow{
+    opacity:1;
+    transform:none;
+}
+
+/* =========================================================
+   OFFER
+========================================================= */
+
+.offer{
+    padding:40px 0 170px;
+}
+
+.offer-shell{
+    position:relative;
+    min-height:600px;
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    align-items:center;
+    overflow:hidden;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+}
+
+.offer-shell::before{
+    content:"";
+    position:absolute;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    right:-100px;
+    top:50%;
+    transform:translateY(-50%);
+    background:radial-gradient(circle,rgba(90,112,255,.17),transparent 68%);
+    filter:blur(12px);
+}
+
+.offer-copy{
+    position:relative;
+    z-index:2;
+    padding:90px 0;
+}
+
+.offer-heading{
+    margin-top:25px;
+    font:600 clamp(48px,6vw,82px)/.92 "Space Grotesk";
+    letter-spacing:-.07em;
+    max-width:700px;
+}
+
+.offer-heading span{
+    color:#5e6879;
+}
+
+.offer-desc{
+    max-width:500px;
+    color:#828da0;
+    line-height:1.8;
+    font-size:13px;
+    margin-top:28px;
+}
+
+.offer-price{
+    position:relative;
+    z-index:2;
+    justify-self:end;
+    width:min(390px,100%);
+    padding:55px 48px;
+    border-left:1px solid var(--line);
+}
+
+.price-small{
+    color:#697489;
+    font:600 10px "Space Grotesk";
+    letter-spacing:.16em;
+}
+
+.price-number{
+    margin-top:13px;
+    font:600 clamp(72px,9vw,120px)/.85 "Space Grotesk";
+    letter-spacing:-.09em;
+}
+
+.price-number sup{
+    font-size:.34em;
+    vertical-align:top;
+    position:relative;
+    top:10px;
+    margin-right:3px;
+}
+
+.price-caption{
+    margin-top:15px;
+    color:#7d879a;
+    font-size:12px;
+}
+
+.feature-list{
+    margin-top:32px;
+    list-style:none;
+    display:grid;
+    gap:13px;
+}
+
+.feature-list li{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    color:#adb4c1;
+    font-size:11px;
+}
+
+.feature-list li::before{
+    content:"";
+    width:15px;
+    height:15px;
+    border-radius:50%;
+    border:1px solid rgba(100,129,255,.5);
+    background:rgba(80,109,255,.08);
+    box-shadow:inset 0 0 8px rgba(91,140,255,.1);
+}
+
+.offer-price .btn{
+    margin-top:34px;
+    width:100%;
+}
+
+/* =========================================================
+   PORTFOLIO
+========================================================= */
+
+.work{
+    padding:50px 0 180px;
+}
+
+.work-heading{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    gap:40px;
+    margin-bottom:80px;
+}
+
+.work-description{
+    color:#737d90;
+    max-width:330px;
+    line-height:1.8;
+    font-size:12px;
+}
+
+.project-stack{
+    display:grid;
+    gap:130px;
+}
+
+.project{
+    position:relative;
+}
+
+.project:nth-child(even){
+    padding-left:14%;
+}
+
+.project-preview{
+    position:relative;
+    min-height:550px;
+    border:1px solid var(--line);
+    background:#070b14;
+    overflow:hidden;
+    perspective:1200px;
+}
+
+.project:nth-child(even) .project-preview{
+    min-height:500px;
+}
+
+.project-glow{
+    position:absolute;
+    width:450px;
+    height:450px;
+    border-radius:50%;
+    right:0;
+    top:-180px;
+    background:radial-gradient(circle,rgba(83,109,255,.22),transparent 68%);
+    filter:blur(15px);
+}
+
+.mock-browser{
+    position:absolute;
+    inset:42px;
+    border:1px solid rgba(255,255,255,.11);
+    background:#0a0f1b;
+    box-shadow:0 30px 90px rgba(0,0,0,.45);
+    transform:rotateX(3deg) rotateY(-3deg) translateY(0);
+    transition:transform 1s var(--ease);
+}
+
+.project:hover .mock-browser{
+    transform:rotateX(0deg) rotateY(0deg) translateY(-8px);
+}
+
+.browser-bar{
+    height:35px;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    padding:0 12px;
+    gap:6px;
+}
+
+.browser-dot{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:#3d4656;
+}
+
+.browser-url{
+    height:18px;
+    margin-left:8px;
+    width:160px;
+    border-radius:5px;
+    background:rgba(255,255,255,.035);
+}
+
+.mock-site{
+    position:absolute;
+    inset:35px 0 0;
+    overflow:hidden;
+}
+
+.mock-site.fitness{
+    background:
+        linear-gradient(110deg,rgba(5,9,17,.96),rgba(11,17,30,.55)),
+        radial-gradient(circle at 75% 35%,rgba(255,75,64,.38),transparent 25%);
+}
+
+.mock-site.restaurant{
+    background:
+        radial-gradient(circle at 70% 40%,rgba(211,163,91,.25),transparent 24%),
+        linear-gradient(120deg,#100d0b,#201610);
+}
+
+.mock-site.local{
+    background:
+        radial-gradient(circle at 75% 35%,rgba(69,137,255,.3),transparent 28%),
+        linear-gradient(135deg,#08101d,#101827);
+}
+
+.mock-site.creator{
+    background:
+        radial-gradient(circle at 75% 25%,rgba(160,87,255,.4),transparent 25%),
+        linear-gradient(130deg,#0d0818,#080914);
+}
+
+.mock-site.professional{
+    background:
+        radial-gradient(circle at 75% 30%,rgba(65,207,194,.25),transparent 25%),
+        #07100f;
+}
+
+.mock-inner{
+    padding:50px;
+}
+
+.mock-label{
+    color:#788398;
+    font:600 7px "Space Grotesk";
+    letter-spacing:.18em;
+}
+
+.mock-title{
+    margin-top:22px;
+    max-width:500px;
+    font:600 clamp(30px,5vw,65px)/.88 "Space Grotesk";
+    letter-spacing:-.07em;
+}
+
+.mock-lines{
+    margin-top:25px;
+    display:grid;
+    gap:7px;
+    width:240px;
+}
+
+.mock-lines i{
+    display:block;
+    height:5px;
+    background:rgba(255,255,255,.09);
+}
+
+.mock-lines i:nth-child(2){width:75%}
+.mock-lines i:nth-child(3){width:54%}
+
+.mock-button{
+    margin-top:28px;
+    width:92px;
+    height:27px;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:100px;
+}
+
+.project-info{
+    position:absolute;
+    left:35px;
+    bottom:30px;
+    z-index:5;
+    display:flex;
+    align-items:end;
+    gap:18px;
+}
+
+.project-index{
+    color:#5c687b;
+    font:600 10px "Space Grotesk";
+}
+
+.project-title{
+    font:500 17px "Space Grotesk";
+}
+
+.project-action{
+    position:absolute;
+    right:30px;
+    bottom:30px;
+    color:#788398;
+    font:600 9px "Space Grotesk";
+    letter-spacing:.14em;
+}
+
+/* =========================================================
+   BEFORE AFTER
+========================================================= */
+
+.transformation{
+    padding:80px 0 180px;
+}
+
+.transform-head{
+    margin-bottom:75px;
+}
+
+.transform-stage{
+    position:relative;
+    height:580px;
+    overflow:hidden;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+}
+
+.transform-before,
+.transform-after{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px;
+}
+
+.transform-before{
+    background:
+        repeating-linear-gradient(0deg,transparent 0 42px,rgba(255,255,255,.025) 43px),
+        #080b11;
+}
+
+.transform-after{
+    background:
+        radial-gradient(circle at 70% 30%,rgba(89,112,255,.25),transparent 30%),
+        radial-gradient(circle at 20% 70%,rgba(139,82,255,.13),transparent 30%),
+        #080d18;
+    clip-path:inset(0 0 0 50%);
+    transition:clip-path .1s linear;
+}
+
+.transform-card{
+    width:min(780px,100%);
+    text-align:center;
+}
+
+.transform-card small{
+    color:#5e6879;
+    font:600 9px "Space Grotesk";
+    letter-spacing:.18em;
+}
+
+.transform-card h3{
+    margin-top:18px;
+    font:600 clamp(46px,7vw,92px)/.88 "Space Grotesk";
+    letter-spacing:-.075em;
+}
+
+.transform-after .transform-card h3{
+    background:linear-gradient(100deg,#fff,#9eaaff,#a779ff);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.transform-copy{
+    margin:20px auto 0;
+    max-width:450px;
+    color:#758094;
+    line-height:1.7;
+    font-size:12px;
+}
+
+.transform-divider{
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:50%;
+    width:1px;
+    background:rgba(255,255,255,.7);
+    z-index:10;
+    box-shadow:0 0 20px rgba(255,255,255,.2);
+    transition:left .1s linear;
+}
+
+.transform-handle{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    z-index:11;
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.5);
+    background:#080d18;
+    display:grid;
+    place-items:center;
+    color:#fff;
+}
+
+/* =========================================================
+   WHY
+========================================================= */
+
+.why{
+    padding:60px 0 180px;
+}
+
+.why-layout{
+    display:grid;
+    grid-template-columns:.8fr 1.2fr;
+    gap:100px;
+}
+
+.sticky-title{
+    position:sticky;
+    top:130px;
+    height:max-content;
+}
+
+.why-list{
+    border-top:1px solid var(--line);
+}
+
+.why-item{
+    padding:40px 0;
+    border-bottom:1px solid var(--line);
+    display:grid;
+    grid-template-columns:60px 1fr;
+    gap:20px;
+}
+
+.why-number{
+    color:#586376;
+    font:600 10px "Space Grotesk";
+}
+
+.why-item h3{
+    font:500 25px "Space Grotesk";
+    letter-spacing:-.04em;
+}
+
+.why-item p{
+    color:#717c90;
+    font-size:12px;
+    line-height:1.8;
+    margin-top:11px;
+    max-width:540px;
+}
+
+/* =========================================================
+   PROCESS
+========================================================= */
+
+.process{
+    padding:80px 0 180px;
+}
+
+.process-head{
+    margin-bottom:90px;
+}
+
+.process-layout{
+    display:grid;
+    grid-template-columns:100px 1fr;
+    gap:40px;
+}
+
+.process-rail{
+    position:relative;
+}
+
+.process-rail::before{
+    content:"";
+    position:absolute;
+    left:9px;
+    top:0;
+    bottom:0;
+    width:1px;
+    background:var(--line);
+}
+
+.process-progress{
+    position:absolute;
+    left:9px;
+    top:0;
+    width:1px;
+    height:0%;
+    background:linear-gradient(var(--blue),var(--violet));
+    box-shadow:0 0 12px rgba(95,117,255,.7);
+}
+
+.process-steps{
+    display:grid;
+    gap:0;
+}
+
+.process-step{
+    min-height:210px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:50px;
+    margin-bottom:50px;
+    display:grid;
+    grid-template-columns:80px 1fr;
+    gap:35px;
+}
+
+.process-step:last-child{
+    margin-bottom:0;
+}
+
+.process-step-number{
+    position:relative;
+    z-index:2;
+    width:20px;
+    height:20px;
+    border:1px solid #394356;
+    background:var(--bg);
+    border-radius:50%;
+    color:#778296;
+    font:600 7px "Space Grotesk";
+    display:grid;
+    place-items:center;
+    box-shadow:0 0 0 7px var(--bg);
+}
+
+.process-step.active .process-step-number{
+    border-color:#6d82ff;
+    color:#fff;
+    box-shadow:0 0 0 7px var(--bg),0 0 25px rgba(91,124,255,.45);
+}
+
+.process-step h3{
+    font:500 clamp(28px,4vw,45px) "Space Grotesk";
+    letter-spacing:-.05em;
+}
+
+.process-step p{
+    color:#717c8f;
+    max-width:500px;
+    font-size:12px;
+    line-height:1.8;
+    margin-top:14px;
+}
+
+/* =========================================================
+   BUSINESS SELECTOR
+========================================================= */
+
+.business{
+    padding:70px 0 180px;
+}
+
+.business-intro{
+    max-width:800px;
+    margin-bottom:65px;
+}
+
+.business-intro p{
+    color:#778195;
+    line-height:1.8;
+    font-size:13px;
+    max-width:530px;
+    margin-top:24px;
+}
+
+.business-selector{
+    display:grid;
+    grid-template-columns:280px 1fr;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+}
+
+.business-types{
+    border-right:1px solid var(--line);
+}
+
+.business-type{
+    width:100%;
+    border:0;
+    border-bottom:1px solid var(--line);
+    background:transparent;
+    color:#596476;
+    padding:19px 20px;
+    text-align:left;
+    font:600 11px "Space Grotesk";
+    cursor:pointer;
+    transition:.4s var(--ease);
+    position:relative;
+}
+
+.business-type:last-child{
+    border-bottom:0;
+}
+
+.business-type::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    width:2px;
+    background:linear-gradient(var(--blue),var(--violet));
+    transform:scaleY(0);
+    transition:transform .4s var(--ease);
+}
+
+.business-type:hover,
+.business-type.active{
+    color:#fff;
+    background:rgba(255,255,255,.035);
+    padding-left:26px;
+}
+
+.business-type.active::before{
+    transform:scaleY(1);
+}
+
+.business-preview{
+    min-height:560px;
+    position:relative;
+    overflow:hidden;
+    background:#080c16;
+    transition:background .7s ease;
+}
+
+.business-preview::before{
+    content:"";
+    position:absolute;
+    width:480px;
+    height:480px;
+    border-radius:50%;
+    right:-100px;
+    top:-130px;
+    background:radial-gradient(circle,rgba(87,112,255,.2),transparent 68%);
+    transition:background .7s ease;
+}
+
+.business-preview-inner{
+    position:absolute;
+    inset:55px;
+    border:1px solid rgba(255,255,255,.09);
+    background:rgba(255,255,255,.018);
+    padding:50px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    transition:.6s var(--ease);
+}
+
+.business-preview-label{
+    color:#657084;
+    font:600 8px "Space Grotesk";
+    letter-spacing:.2em;
+}
+
+.business-preview h3{
+    margin-top:16px;
+    font:600 clamp(45px,6vw,85px)/.86 "Space Grotesk";
+    letter-spacing:-.08em;
+    max-width:650px;
+}
+
+.business-preview p{
+    color:#7b8698;
+    max-width:470px;
+    font-size:12px;
+    line-height:1.8;
+    margin-top:22px;
+}
+
+.preview-chip{
+    position:absolute;
+    right:35px;
+    bottom:35px;
+    border:1px solid var(--line);
+    border-radius:100px;
+    padding:10px 14px;
+    color:#8b96a9;
+    font:600 9px "Space Grotesk";
+}
+
+/* =========================================================
+   COMMUNICATION / TESTIMONIAL ALTERNATIVE
+========================================================= */
+
+.goals{
+    padding:70px 0 180px;
+}
+
+.goals-heading{
+    display:flex;
+    justify-content:space-between;
+    gap:40px;
+    align-items:end;
+    margin-bottom:70px;
+}
+
+.goals-heading p{
+    color:#727d90;
+    font-size:12px;
+    line-height:1.8;
+    max-width:330px;
+}
+
+.goal-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+}
+
+.goal{
+    min-height:240px;
+    padding:30px 22px;
+    border-right:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+}
+
+.goal:last-child{
+    border-right:0;
+}
+
+.goal::after{
+    content:"";
+    position:absolute;
+    width:130px;
+    height:130px;
+    border-radius:50%;
+    right:-70px;
+    bottom:-70px;
+    background:rgba(93,114,255,.12);
+    filter:blur(20px);
+    transition:.6s var(--ease);
+}
+
+.goal:hover::after{
+    transform:scale(2);
+}
+
+.goal-number{
+    color:#4c576a;
+    font:600 9px "Space Grotesk";
+}
+
+.goal-word{
+    position:absolute;
+    left:22px;
+    bottom:28px;
+    font:500 clamp(21px,2vw,30px) "Space Grotesk";
+    letter-spacing:-.045em;
+}
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact{
+    padding:80px 0 100px;
+}
+
+.contact-shell{
+    position:relative;
+    padding:100px 0;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+}
+
+.contact-shell::before{
+    content:"";
+    position:absolute;
+    width:600px;
+    height:600px;
+    border-radius:50%;
+    left:50%;
+    top:55%;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(circle,rgba(87,108,255,.13),transparent 68%);
+    filter:blur(20px);
+}
+
+.contact-content{
+    position:relative;
+    z-index:2;
+    text-align:center;
+}
+
+.contact-content h2{
+    font:600 clamp(54px,8vw,110px)/.86 "Space Grotesk";
+    letter-spacing:-.08em;
+    max-width:1000px;
+    margin:24px auto 0;
+}
+
+.contact-content h2 span{
+    color:#5a6475;
+}
+
+.contact-description{
+    max-width:500px;
+    color:#788396;
+    line-height:1.8;
+    font-size:13px;
+    margin:27px auto 0;
+}
+
+.contact-actions{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:35px;
+}
+
+.contact-details{
+    margin-top:48px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:15px 35px;
+    color:#697487;
+    font:500 11px "Space Grotesk";
+}
+
+.contact-details a{
+    transition:color .3s ease;
+}
+
+.contact-details a:hover{
+    color:#fff;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    padding:35px 0 28px;
+}
+
+.footer-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    gap:30px;
+    padding-bottom:35px;
+    border-bottom:1px solid var(--line);
+}
+
+.footer-brand{
+    font:600 23px "Space Grotesk";
+    letter-spacing:-.05em;
+}
+
+.footer-sub{
+    color:#5f6a7c;
+    font-size:11px;
+    margin-top:8px;
+}
+
+.footer-links{
+    display:flex;
+    gap:22px;
+    color:#6d7789;
+    font:600 10px "Space Grotesk";
+}
+
+.footer-links a:hover{
+    color:#fff;
+}
+
+.footer-bottom{
+    padding-top:22px;
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    color:#465062;
+    font-size:9px;
+}
+
+/* =========================================================
+   FLOATING WHATSAPP
+========================================================= */
+
+.whatsapp-float{
+    position:fixed;
+    right:24px;
+    bottom:24px;
+    z-index:300;
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:#54d89c;
+    color:#06140e;
+    box-shadow:0 12px 45px rgba(84,216,156,.18);
+    transition:.4s var(--ease);
+}
+
+.whatsapp-float:hover{
+    transform:translateY(-5px) scale(1.04);
+}
+
+.whatsapp-float::before{
+    content:"";
+    position:absolute;
+    inset:-7px;
+    border:1px solid rgba(84,216,156,.2);
+    border-radius:50%;
+    animation:pulse 2.6s infinite;
+}
+
+.whatsapp-icon{
+    width:22px;
+    height:22px;
+}
+
+@keyframes pulse{
+    0%,100%{transform:scale(.9);opacity:.1}
+    50%{transform:scale(1.15);opacity:.7}
+}
+
+/* =========================================================
+   SOUND
+========================================================= */
+
+.sound-toggle{
+    position:fixed;
+    left:24px;
+    bottom:24px;
+    z-index:300;
+    height:36px;
+    padding:0 13px;
+    border:1px solid var(--line);
+    border-radius:100px;
+    color:#727d90;
+    background:rgba(3,7,18,.65);
+    backdrop-filter:blur(14px);
+    font:600 9px "Space Grotesk";
+    cursor:pointer;
+}
+
+.sound-toggle.active{
+    color:#fff;
+    border-color:rgba(99,125,255,.4);
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:900px){
+
+    .nav-links,
+    .nav-price{
+        display:none;
+    }
+
+    .menu-toggle{
+        display:block;
+    }
+
+    .hero{
+        padding-top:120px;
+    }
+
+    .hero-vignette{
+        background:
+            linear-gradient(90deg,rgba(3,7,18,.94),rgba(3,7,18,.48)),
+            linear-gradient(0deg,var(--bg) 5%,transparent 50%,rgba(3,7,18,.7));
+    }
+
+    .hero-price-orb{
+        right:5%;
+        bottom:20%;
+        width:115px;
+        height:115px;
+    }
+
+    .hero-price-orb strong{
+        font-size:22px;
+    }
+
+    .services-intro,
+    .offer-shell,
+    .why-layout{
+        grid-template-columns:1fr;
+        gap:45px;
+    }
+
+    .offer-shell{
+        min-height:0;
+    }
+
+    .offer-price{
+        justify-self:stretch;
+        width:auto;
+        border-left:0;
+        border-top:1px solid var(--line);
+        padding:55px 0;
+    }
+
+    .work-heading,
+    .goals-heading{
+        display:block;
+    }
+
+    .work-description,
+    .goals-heading p{
+        margin-top:22px;
+    }
+
+    .project:nth-child(even){
+        padding-left:0;
+    }
+
+    .project-preview,
+    .project:nth-child(even) .project-preview{
+        min-height:460px;
+    }
+
+    .mock-browser{
+        inset:25px;
+    }
+
+    .mock-inner{
+        padding:35px;
+    }
+
+    .transform-stage{
+        height:500px;
+    }
+
+    .business-selector{
+        grid-template-columns:1fr;
+    }
+
+    .business-types{
+        display:grid;
+        grid-template-columns:repeat(4,1fr);
+        border-right:0;
+        border-bottom:1px solid var(--line);
+    }
+
+    .business-type{
+        border-right:1px solid var(--line);
+        font-size:9px;
+        padding:17px 8px;
+        text-align:center;
+    }
+
+    .business-type:nth-child(4n){
+        border-right:0;
+    }
+
+    .business-preview{
+        min-height:480px;
+    }
+
+    .goal-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .goal{
+        border-bottom:1px solid var(--line);
+    }
+
+    .goal:nth-child(2n){
+        border-right:0;
+    }
+
+    .process-layout{
+        grid-template-columns:30px 1fr;
+        gap:20px;
+    }
+
+    .process-step{
+        grid-template-columns:40px 1fr;
+        gap:20px;
+    }
+}
+
+@media(max-width:600px){
+
+    :root{
+        --nav-h:68px;
+    }
+
+    .container,
+    .hero-content,
+    .nav-inner{
+        width:min(100% - 32px,1240px);
+    }
+
+    .nav{
+        height:68px;
+    }
+
+    .nav-inner{
+        width:calc(100% - 32px);
+    }
+
+    .logo-name{
+        font-size:12px;
+    }
+
+    .hero{
+        min-height:100svh;
+        padding:110px 0 70px;
+    }
+
+    .hero-title{
+        font-size:clamp(48px,15vw,74px);
+        line-height:.89;
+    }
+
+    .hero-desc{
+        font-size:13px;
+        line-height:1.75;
+        margin-top:24px;
+    }
+
+    .hero-actions{
+        display:grid;
+        grid-template-columns:1fr;
+    }
+
+    .hero-actions .btn{
+        width:100%;
+    }
+
+    .hero-meta{
+        gap:10px 14px;
+        line-height:1.6;
+    }
+
+    .hero-price-orb{
+        width:92px;
+        height:92px;
+        right:6%;
+        bottom:14%;
+        opacity:.8;
+    }
+
+    .hero-price-orb strong{
+        font-size:18px;
+    }
+
+    .hero-price-orb small{
+        font-size:6px;
+    }
+
+    .hero-scroll{
+        display:none;
+    }
+
+    .services{
+        padding:100px 0;
+    }
+
+    .section-heading{
+        font-size:clamp(42px,13vw,60px);
+    }
+
+    .services-intro{
+        margin-bottom:55px;
+    }
+
+    .service-row{
+        grid-template-columns:40px 1fr;
+        min-height:90px;
+    }
+
+    .service-tag{
+        display:none;
+    }
+
+    .service-name{
+        font-size:22px;
+    }
+
+    .service-arrow{
+        right:5px;
+        opacity:.7;
+    }
+
+    .offer{
+        padding:10px 0 110px;
+    }
+
+    .offer-copy{
+        padding:65px 0 45px;
+    }
+
+    .offer-heading{
+        font-size:clamp(46px,13vw,65px);
+    }
+
+    .price-number{
+        font-size:82px;
+    }
+
+    .work{
+        padding:20px 0 110px;
+    }
+
+    .work-heading{
+        margin-bottom:55px;
+    }
+
+    .project-stack{
+        gap:70px;
+    }
+
+    .project-preview,
+    .project:nth-child(even) .project-preview{
+        min-height:400px;
+    }
+
+    .mock-browser{
+        inset:17px;
+    }
+
+    .browser-bar{
+        height:27px;
+    }
+
+    .mock-site{
+        inset:27px 0 0;
+    }
+
+    .mock-inner{
+        padding:28px 24px;
+    }
+
+    .mock-title{
+        font-size:39px;
+    }
+
+    .project-info{
+        left:20px;
+        bottom:20px;
+    }
+
+    .project-action{
+        right:20px;
+        bottom:20px;
+    }
+
+    .transformation,
+    .why,
+    .process,
+    .business,
+    .goals{
+        padding:40px 0 110px;
+    }
+
+    .transform-head{
+        margin-bottom:50px;
+    }
+
+    .transform-stage{
+        height:430px;
+    }
+
+    .transform-before,
+    .transform-after{
+        padding:25px;
+    }
+
+    .transform-card h3{
+        font-size:48px;
+    }
+
+    .transform-copy{
+        font-size:10px;
+    }
+
+    .sticky-title{
+        position:static;
+        margin-bottom:50px;
+    }
+
+    .why-item{
+        grid-template-columns:35px 1fr;
+        padding:30px 0;
+    }
+
+    .why-item h3{
+        font-size:22px;
+    }
+
+    .process-head{
+        margin-bottom:60px;
+    }
+
+    .process-step{
+        min-height:180px;
+        padding-bottom:35px;
+        margin-bottom:35px;
+    }
+
+    .business-types{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .business-type{
+        border-bottom:1px solid var(--line);
+    }
+
+    .business-type:nth-child(2n){
+        border-right:0;
+    }
+
+    .business-preview{
+        min-height:420px;
+    }
+
+    .business-preview-inner{
+        inset:22px;
+        padding:30px;
+    }
+
+    .business-preview h3{
+        font-size:52px;
+    }
+
+    .goal-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .goal{
+        min-height:180px;
+        padding:22px 16px;
+    }
+
+    .goal-word{
+        left:16px;
+        bottom:20px;
+    }
+
+    .contact{
+        padding:30px 0 70px;
+    }
+
+    .contact-shell{
+        padding:75px 0;
+    }
+
+    .contact-content h2{
+        font-size:clamp(50px,15vw,76px);
+    }
+
+    .contact-actions{
+        display:grid;
+        grid-template-columns:1fr;
+    }
+
+    .contact-actions .btn{
+        width:100%;
+    }
+
+    .contact-details{
+        flex-direction:column;
+        gap:13px;
+    }
+
+    .footer-top{
+        align-items:start;
+        flex-direction:column;
+    }
+
+    .footer-links{
+        flex-wrap:wrap;
+    }
+
+    .footer-bottom{
+        flex-direction:column;
+    }
+
+    .whatsapp-float{
+        right:17px;
+        bottom:17px;
+        width:51px;
+        height:51px;
+    }
+
+    .sound-toggle{
+        left:17px;
+        bottom:17px;
+    }
+
+    .cursor-dot,
+    .cursor-ring{
+        display:none;
+    }
+}
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+        scroll-behavior:auto!important;
+        animation-duration:.01ms!important;
+        animation-iteration-count:1!important;
+        transition-duration:.01ms!important;
+    }
+
+    .reveal{
+        opacity:1;
+        transform:none;
+        filter:none;
+    }
+
+    .hero-title .line span{
+        transform:none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<div class="site-world">
+    <div class="world-glow one"></div>
+    <div class="world-glow two"></div>
+    <div class="world-glow three"></div>
+    <div class="grid-world"></div>
+</div>
+
+<div class="noise"></div>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ======================================================
+     NAVIGATION
+====================================================== -->
+
+<header class="nav" id="nav">
+    <div class="nav-inner">
+
+        <a href="#home" class="logo" aria-label="Muhammad Ali Khan home">
+            <span class="logo-mark"><span>M.A.K.</span></span>
+            <span class="logo-name">MUHAMMAD ALI KHAN</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#work">Work</a>
+            <a href="#process">Process</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <a class="nav-price magnetic" href="#offer">₹2,200 WEBSITE</a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+            <span></span>
+            <span></span>
+        </button>
+
+    </div>
+</header>
+
+<!-- MOBILE MENU -->
+
+<div class="mobile-menu" id="mobileMenu">
+
+    <nav class="mobile-menu-links">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#process">Process</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="mobile-menu-footer">
+        <span>PREMIUM WEB EXPERIENCES</span>
+        <span>₹2,200 STARTING</span>
+    </div>
+
+</div>
+
+<main>
+
+<!-- ======================================================
+     HERO
+====================================================== -->
+
+<section class="hero" id="home">
+
+    <div class="hero-canvas">
+        <canvas id="webgl"></canvas>
+        <div class="hero-vignette"></div>
+    </div>
+
+    <div class="hero-content">
+
+        <div class="hero-copy">
+
+            <div class="eyebrow hero-label">
+                INDEPENDENT WEB BUILDER
+            </div>
+
+            <h1 class="hero-title">
+                <span class="line"><span>WE BUILD</span></span>
+                <span class="line"><span>WEBSITES THAT</span></span>
+                <span class="line"><span class="gradient">MAKE BUSINESSES</span></span>
+                <span class="line"><span>LOOK PREMIUM.</span></span>
+            </h1>
+
+            <p class="hero-desc">
+                Modern, fast and conversion-focused websites designed specifically
+                for businesses that want a stronger online presence.
+            </p>
+
+            <div class="hero-actions">
+
+                <a href="https://wa.me/919833994143?text=Hi%20Muhammad%2C%20I%20want%20to%20build%20a%20website%20for%20my%20business.%20Please%20share%20the%20details."
+                   class="btn btn-primary magnetic whatsapp-link">
+                    BUILD MY WEBSITE
+                    <span class="btn-arrow">↗</span>
+                </a>
+
+                <a href="#services" class="btn magnetic">
+                    VIEW SERVICES
+                    <span class="btn-arrow">↓</span>
+                </a>
+
+            </div>
+
+            <div class="hero-meta">
+                <span><i></i>Custom design</span>
+                <span><i></i>Mobile optimized</span>
+                <span><i></i>Fast delivery</span>
+            </div>
+
+        </div>
+
+        <div class="hero-price-orb">
+            <div>
+                <strong>₹2,200</strong>
+                <small>STARTING PRICE</small>
+            </div>
+        </div>
+
+        <div class="hero-scroll">
+            <span>SCROLL TO EXPLORE</span>
+            <div class="hero-scroll-line"></div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ======================================================
+     MARQUEE
+====================================================== -->
+
+<div class="marquee">
+    <div class="marquee-track">
+
+        <div class="marquee-item">
+            <b>01</b> BUSINESS WEBSITES
+        </div>
+
+        <div class="marquee-item">
+            <b>02</b> RESTAURANT WEBSITES
+        </div>
+
+        <div class="marquee-item">
+            <b>03</b> FITNESS WEBSITES
+        </div>
+
+        <div class="marquee-item">
+            <b>04</b> CREATOR WEBSITES
+        </div>
+
+        <div class="marquee-item">
+            <b>05</b> LOCAL BUSINESS
+        </div>
+
+        <div class="marquee-item">
+            <b>06</b> PROFESSIONAL SERVICES
+        </div>
+
+        <div class="marquee-item">
+            <b>01</b> BUSINESS WEBSITES
+        </div>
+
+        <div class="marquee-item">
+            <b>02</b> RESTAURANT WEBSITES
+        </div>
+
+        <div class="marquee-item">
+            <b>03</b> FITNESS WEBSITES
+        </div>
+
+        <div class="marquee-item">
+            <b>04</b> CREATOR WEBSITES
+        </div>
+
+        <div class="marquee-item">
+            <b>05</b> LOCAL BUSINESS
+        </div>
+
+        <div class="marquee-item">
+            <b>06</b> PROFESSIONAL SERVICES
+        </div>
+
+    </div>
+</div>
+
+<!-- ======================================================
+     SERVICES
+====================================================== -->
+
+<section class="services" id="services">
+
+    <div class="container">
+
+        <div class="services-intro">
+
+            <div class="reveal">
+                <div class="eyebrow">WHAT I BUILD</div>
+
+                <h2 class="section-heading" style="margin-top:25px;">
+                    <span class="split-line">
+                        <span>YOUR BUSINESS,</span>
+                    </span>
+                    <span class="split-line">
+                        <span>BUILT FOR THE</span>
+                    </span>
+                    <span class="split-line">
+                        <span class="dim">DIGITAL WORLD.</span>
+                    </span>
+                </h2>
+            </div>
+
+            <p class="services-note reveal">
+                From local businesses to personal brands, I create modern web
+                experiences that present your business clearly and professionally
+                across phones, tablets and desktops.
+            </p>
+
+        </div>
+
+        <div class="service-list reveal">
+
+            <a href="#contact" class="service-row magnetic-area">
+                <span class="service-number">01</span>
+                <span class="service-name">Business Websites</span>
+                <span class="service-tag">PRESENT / CONVERT</span>
+                <span class="service-arrow">↗</span>
+            </a>
+
+            <a href="#contact" class="service-row magnetic-area">
+                <span class="service-number">02</span>
+                <span class="service-name">Restaurant Websites</span>
+                <span class="service-tag">MENU / LOCATION</span>
+                <span class="service-arrow">↗</span>
+            </a>
+
+            <a href="#contact" class="service-row magnetic-area">
+                <span class="service-number">03</span>
+                <span class="service-name">Gym & Fitness Websites</span>
+                <span class="service-tag">ENERGY / BRAND</span>
+                <span class="service-arrow">↗</span>
+            </a>
+
+            <a href="#contact" class="service-row magnetic-area">
+                <span class="service-number">04</span>
+                <span class="service-name">Portfolio Websites</span>
+                <span class="service-tag">PERSONAL BRAND</span>
+                <span class="service-arrow">↗</span>
+            </a>
+
+            <a href="#contact" class="service-row magnetic-area">
+                <span class="service-number">05</span>
+                <span class="service-name">Landing Pages</span>
+                <span class="service-tag">FOCUS / ACTION</span>
+                <span class="service-arrow">↗</span>
+            </a>
+
+            <a href="#contact" class="service-row magnetic-area">
+                <span class="service-number">06</span>
+                <span class="service-name">Creator Websites</span>
+                <span class="service-tag">CONTENT / IDENTITY</span>
+                <span class="service-arrow">↗</span>
+            </a>
+
+            <a href="#contact" class="service-row magnetic-area">
+                <span class="service-number">07</span>
+                <span class="service-name">Local Business Websites</span>
+                <span class="service-tag">DISCOVER / CONTACT</span>
+                <span class="service-arrow">↗</span>
+            </a>
+
+            <a href="#contact" class="service-row magnetic-area">
+                <span class="service-number">08</span>
+                <span class="service-name">Product / Service Websites</span>
+                <span class="service-tag">EXPLAIN / SELL</span>
+                <span class="service-arrow">↗</span>
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ======================================================
+     OFFER
+====================================================== -->
+
+<section class="offer" id="offer">
+
+    <div class="container">
+
+        <div class="offer-shell">
+
+            <div class="offer-copy reveal">
+
+                <div class="eyebrow">THE STARTING POINT</div>
+
+                <h2 class="offer-heading">
+                    GO ONLINE WITHOUT
+                    <span>A HUGE BUDGET.</span>
+                </h2>
+
+                <p class="offer-desc">
+                    Get a modern, mobile-friendly business website designed around
+                    your brand, your services and the people you want to reach.
+                </p>
+
+            </div>
+
+            <div class="offer-price reveal">
+
+                <div class="price-small">PROFESSIONAL WEBSITE</div>
+
+                <div class="price-number">
+                    <sup>₹</sup>2,200
+                </div>
+
+                <div class="price-caption">
+                    STARTING PRICE
+                </div>
+
+                <ul class="feature-list">
+
+                    <li>Custom-designed layout</li>
+                    <li>Mobile responsive</li>
+                    <li>Modern animations</li>
+                    <li>WhatsApp contact integration</li>
+                    <li>Business information section</li>
+                    <li>Services / product showcase</li>
+                    <li>Contact section</li>
+                    <li>Basic SEO-friendly structure</li>
+                    <li>Fast-loading structure</li>
+
+                </ul>
+
+                <a href="https://wa.me/919833994143?text=Hi%20Muhammad%2C%20I%20want%20to%20build%20a%20website%20for%20my%20business.%20Please%20share%20the%20details."
+                   class="btn btn-primary whatsapp-link">
+                    START MY WEBSITE
+                    <span class="btn-arrow">↗</span>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ======================================================
+     WORK
+====================================================== -->
+
+<section class="work" id="work">
+
+    <div class="container">
+
+        <div class="work-heading">
+
+            <div class="reveal">
+                <div class="eyebrow">SELECTED CONCEPTS</div>
+
+                <h2 class="section-heading" style="margin-top:25px;">
+                    <span class="split-line">
+                        <span>IMAGINE YOUR</span>
+                    </span>
+                    <span class="split-line">
+                        <span>BUSINESS</span>
+                    </span>
+                    <span class="split-line">
+                        <span class="dim">LIKE THIS.</span>
+                    </span>
+                </h2>
+            </div>
+
+            <p class="work-description reveal">
+                These are concept directions showing how different types of
+                businesses can be presented through a custom website.
+            </p>
+
+        </div>
+
+        <div class="project-stack">
+
+            <!-- PROJECT 01 -->
+            <article class="project reveal">
+
+                <div class="project-preview">
+
+                    <div class="project-glow"></div>
+
+                    <div class="mock-browser">
+
+                        <div class="browser-bar">
+                            <i class="browser-dot"></i>
+                            <i class="browser-dot"></i>
+                            <i class="browser-dot"></i>
+                            <span class="browser-url"></span>
+                        </div>
+
+                        <div class="mock-site fitness">
+
+                            <div class="mock-inner">
+                                <div class="mock-label">FITNESS / PERFORMANCE</div>
+
+                                <h3 class="mock-title">
+                                    BUILD YOUR
+                                    STRONGER SELF.
+                                </h3>
+
+                                <div class="mock-lines">
+                                    <i></i>
+                                    <i></i>
+                                    <i></i>
+                                </div>
+
+                                <div class="mock-button"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="project-info">
+                        <span class="project-index">01</span>
+                        <span class="project-title">FITNESS CLUB</span>
+                    </div>
+
+                    <div class="project-action">EXPLORE ↗</div>
+
+                </div>
+
+            </article>
+
+            <!-- PROJECT 02 -->
+            <article class="project reveal">
+
+                <div class="project-preview">
+
+                    <div class="project-glow"></div>
+
+                    <div class="mock-browser">
+
+                        <div class="browser-bar">
+                            <i class="browser-dot"></i>
+                            <i class="browser-dot"></i>
+                            <i class="browser-dot"></i>
+                            <span class="browser-url"></span>
+                        </div>
+
+                        <div class="mock-site restaurant">
+
+                            <div class="mock-inner">
+                                <div class="mock-label">RESTAURANT / DINING</div>
+
+                                <h3 class="mock-title">
+                                    TASTE
+                                    THE MOMENT.
+                                </h3>
+
+                                <div class="mock-lines">
+                                    <i></i>
+                                    <i></i>
+                                    <i></i>
+                                </div>
+
+                                <div class="mock-button"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="project-info">
+                        <span class="project-index">02</span>
+                        <span class="project-title">RESTAURANT</span>
+                    </div>
+
+                    <div class="project-action">EXPLORE ↗</div>
+
+                </div>
+
+            </article>
+
+            <!-- PROJECT 03 -->
+            <article class="project reveal">
+
+                <div class="project-preview">
+
+                    <div class="project-glow"></div>
+
+                    <div class="mock-browser">
+
+                        <div class="browser-bar">
+                            <i class="browser-dot"></i>
+                            <i class="browser-dot"></i>
+                            <i class="browser-dot"></i>
+                            <span class="browser-url"></span>
+                        </div>
+
+                        <div class="mock-site local">
+
+                            <div class="mock-inner">
+                                <div class="mock-label">LOCAL BUSINESS</div>
+
+                                <h3 class="mock-title">
+                                    YOUR
+                                    BUSINESS.
+                                    ONLINE.
+                                </h3>
+
+                                <div class="mock-lines">
+                                    <i></i>
+                                    <i></i>
+                                    <i></i>
+                                </div>
+
+                                <div class="mock-button"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="project-info">
+                        <span class="project-index">03</span>
+                        <span class="project-title">LOCAL BUSINESS</span>
+                    </div>
+
+                    <div class="project-action">EXPLORE ↗</div>
+
+                </div>
+
+            </article>
+
+            <!-- PROJECT 04 -->
+            <article class="project reveal">
+
+                <div class="project-preview">
+
+                    <div class="project-glow"></div>
+
+                    <div class="mock-browser">
+
+                        <div class="browser-bar">
+                            <i class="browser-dot"></i>
+                            <i class="browser-dot"></i>
+                            <i class="browser-dot"></i>
+                            <span class="browser-url"></span>
+                        </div>
+
+                        <div class="mock-site creator">
+
+                            <div class="mock-inner">
+                                <div class="mock-label">CREATOR / PERSONAL BRAND</div>
+
+                                <h3 class="mock-title">
+                                    MAKE YOUR
+                                    NAME
+                                    MEMORABLE.
+                                </h3>
+
+                                <div class="mock-lines">
+                                    <i></i>
+                                    <i></i>
+                                    <i></i>
+                                </div>
+
+                                <div class="mock-button"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="project-info">
+                        <span class="project-index">04</span>
+                        <span class="project-title">CREATOR</span>
+                    </div>
+
+                    <div class="project-action">EXPLORE ↗</div>
+
+                </div>
+
+            </article>
+
+            <!-- PROJECT 05 -->
+            <article class="project reveal">
+
+                <div class="project-preview">
+
+                    <div class="project-glow"></div>
+
+                    <div class="mock-browser">
+
+                        <div class="browser-bar">
+                            <i class="browser-dot"></i>
+                            <i class="browser-dot"></i>
+                            <i class="browser-dot"></i>
+                            <span class="browser-url"></span>
+                        </div>
+
+                        <div class="mock-site professional">
+
+                            <div class="mock-inner">
+                                <div class="mock-label">PROFESSIONAL SERVICE</div>
+
+                                <h3 class="mock-title">
+                                    CLARITY
+                                    BUILDS
+                                    TRUST.
+                                </h3>
+
+                                <div class="mock-lines">
+                                    <i></i>
+                                    <i></i>
+                                    <i></i>
+                                </div>
+
+                                <div class="mock-button"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="project-info">
+                        <span class="project-index">05</span>
+                        <span class="project-title">PROFESSIONAL SERVICE</span>
+                    </div>
+
+                    <div class="project-action">EXPLORE ↗</div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ======================================================
+     BEFORE AFTER
+====================================================== -->
+
+<section class="transformation">
+
+    <div class="container">
+
+        <div class="transform-head reveal">
+
+            <div class="eyebrow">THE DIFFERENCE</div>
+
+            <h2 class="section-heading" style="margin-top:25px;">
+                <span class="split-line">
+                    <span>FROM INVISIBLE</span>
+                </span>
+                <span class="split-line">
+                    <span class="dim">TO IMPRESSIVE.</span>
+                </span>
+            </h2>
+
+        </div>
+
+        <div class="transform-stage" id="transformStage">
+
+            <div class="transform-before">
+
+                <div class="transform-card">
+                    <small>WITHOUT A CUSTOM WEB PRESENCE</small>
+
+                    <h3>
+                        JUST ANOTHER
+                        LOCAL BUSINESS.
+                    </h3>
+
+                    <p class="transform-copy">
+                        Important information can be difficult to discover when
+                        customers have no clear online destination.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="transform-after" id="transformAfter">
+
+                <div class="transform-card">
+                    <small>WITH A PURPOSE-BUILT WEBSITE</small>
+
+                    <h3>
+                        PROFESSIONAL
+                        DIGITAL PRESENCE.
+                    </h3>
+
+                    <p class="transform-copy">
+                        Your services, story, contact details and business identity
+                        can come together in one clear online experience.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="transform-divider" id="transformDivider"></div>
+
+            <div class="transform-handle" id="transformHandle">
+                ↔
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ======================================================
+     WHY
+====================================================== -->
+
+<section class="why">
+
+    <div class="container">
+
+        <div class="why-layout">
+
+            <div class="sticky-title reveal">
+
+                <div class="eyebrow">WHY WORK WITH ME</div>
+
+                <h2 class="section-heading" style="margin-top:25px;">
+                    YOUR BUSINESS.
+                    <span class="dim">YOUR BRAND.</span>
+                    YOUR WEBSITE.
+                </h2>
+
+            </div>
+
+            <div class="why-list reveal">
+
+                <article class="why-item">
+                    <div class="why-number">01</div>
+                    <div>
+                        <h3>CUSTOM DESIGN</h3>
+                        <p>
+                            No generic one-size-fits-all layout. The structure and
+                            visual direction can be built around your business.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="why-item">
+                    <div class="why-number">02</div>
+                    <div>
+                        <h3>MOBILE FIRST</h3>
+                        <p>
+                            Designed to look clean and easy to use on the phones
+                            your customers already use every day.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="why-item">
+                    <div class="why-number">03</div>
+                    <div>
+                        <h3>FAST EXPERIENCE</h3>
+                        <p>
+                            Smooth interactions without unnecessary loading,
+                            oversized effects or technical clutter.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="why-item">
+                    <div class="why-number">04</div>
+                    <div>
+                        <h3>BUSINESS FOCUSED</h3>
+                        <p>
+                            The website is structured to help visitors understand
+                            what you offer and how they can contact you.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="why-item">
+                    <div class="why-number">05</div>
+                    <div>
+                        <h3>DIRECT COMMUNICATION</h3>
+                        <p>
+                            Discuss your website directly through WhatsApp or email
+                            instead of getting lost in a complicated process.
+                        </p>
+                    </div>
+                </article>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ======================================================
+     PROCESS
+====================================================== -->
+
+<section class="process" id="process">
+
+    <div class="container">
+
+        <div class="process-head reveal">
+
+            <div class="eyebrow">THE PROCESS</div>
+
+            <h2 class="section-heading" style="margin-top:25px;">
+                <span class="split-line">
+                    <span>FROM IDEA</span>
+                </span>
+                <span class="split-line">
+                    <span class="dim">TO ONLINE.</span>
+                </span>
+            </h2>
+
+        </div>
+
+        <div class="process-layout">
+
+            <div class="process-rail">
+                <div class="process-progress" id="processProgress"></div>
+            </div>
+
+            <div class="process-steps">
+
+                <article class="process-step">
+                    <div class="process-step-number">01</div>
+                    <div>
+                        <h3>TELL ME ABOUT YOUR BUSINESS</h3>
+                        <p>
+                            Tell me what your business does, what you offer and
+                            what you want customers to understand.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="process-step">
+                    <div class="process-step-number">02</div>
+                    <div>
+                        <h3>DESIGN THE EXPERIENCE</h3>
+                        <p>
+                            We decide the visual direction, sections, content
+                            hierarchy and customer journey.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="process-step">
+                    <div class="process-step-number">03</div>
+                    <div>
+                        <h3>BUILD THE WEBSITE</h3>
+                        <p>
+                            The design becomes a responsive web experience
+                            optimized for phones and larger screens.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="process-step">
+                    <div class="process-step-number">04</div>
+                    <div>
+                        <h3>REVIEW & REFINE</h3>
+                        <p>
+                            Review the experience and refine the details that
+                            matter to your business.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="process-step">
+                    <div class="process-step-number">05</div>
+                    <div>
+                        <h3>GO LIVE</h3>
+                        <p>
+                            Your finished website becomes the online home for
+                            your business.
+                        </p>
+                    </div>
+                </article>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ======================================================
+     BUSINESS SELECTOR
+====================================================== -->
+
+<section class="business">
+
+    <div class="container">
+
+        <div class="business-intro reveal">
+
+            <div class="eyebrow">YOUR BUSINESS</div>
+
+            <h2 class="section-heading" style="margin-top:25px;">
+                WHAT COULD
+                <span class="dim">YOUR WEBSITE</span>
+                FEEL LIKE?
+            </h2>
+
+            <p>
+                Select a business type and explore a visual direction. Your actual
+                website would be customized around your own identity and services.
+            </p>
+
+        </div>
+
+        <div class="business-selector reveal">
+
+            <div class="business-types">
+
+                <button class="business-type active" data-type="Gym">
+                    GYM
+                </button>
+
+                <button class="business-type" data-type="Restaurant">
+                    RESTAURANT
+                </button>
+
+                <button class="business-type" data-type="Salon">
+                    SALON
+                </button>
+
+                <button class="business-type" data-type="Shop">
+                    SHOP
+                </button>
+
+                <button class="business-type" data-type="Agency">
+                    AGENCY
+                </button>
+
+                <button class="business-type" data-type="Creator">
+                    CREATOR
+                </button>
+
+                <button class="business-type" data-type="Professional">
+                    PROFESSIONAL
+                </button>
+
+                <button class="business-type" data-type="Other">
+                    OTHER
+                </button>
+
+            </div>
+
+            <div class="business-preview" id="businessPreview">
+
+                <div class="business-preview-inner">
+
+                    <div class="business-preview-label">
+                        SELECTED DIRECTION
+                    </div>
+
+                    <h3 id="businessTitle">
+                        GYM
+                    </h3>
+
+                    <p id="businessDescription">
+                        An energetic, premium digital experience focused on
+                        memberships, training, facilities and direct enquiries.
+                    </p>
+
+                    <span class="preview-chip" id="businessChip">
+                        PERFORMANCE / ENERGY
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ======================================================
+     GOALS
+====================================================== -->
+
+<section class="goals">
+
+    <div class="container">
+
+        <div class="goals-heading reveal">
+
+            <div>
+                <div class="eyebrow">DESIGN GOALS</div>
+
+                <h2 class="section-heading" style="margin-top:25px;">
+                    WHAT YOUR
+                    <span class="dim">WEBSITE CAN</span>
+                    COMMUNICATE.
+                </h2>
+            </div>
+
+            <p>
+                These are design goals, not customer reviews or invented
+                testimonials. The website is built to communicate these qualities
+                through structure, content and visual presentation.
+            </p>
+
+        </div>
+
+        <div class="goal-grid reveal">
+
+            <div class="goal">
+                <span class="goal-number">01</span>
+                <span class="goal-word">Professional.</span>
+            </div>
+
+            <div class="goal">
+                <span class="goal-number">02</span>
+                <span class="goal-word">Trustworthy.</span>
+            </div>
+
+            <div class="goal">
+                <span class="goal-number">03</span>
+                <span class="goal-word">Easy to contact.</span>
+            </div>
+
+            <div class="goal">
+                <span class="goal-number">04</span>
+                <span class="goal-word">Modern.</span>
+            </div>
+
+            <div class="goal">
+                <span class="goal-number">05</span>
+                <span class="goal-word">Built around you.</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ======================================================
+     CONTACT
+====================================================== -->
+
+<section class="contact" id="contact">
+
+    <div class="container">
+
+        <div class="contact-shell reveal">
+
+            <div class="contact-content">
+
+                <div class="eyebrow" style="justify-content:center;">
+                    LET'S BUILD
+                </div>
+
+                <h2>
+                    READY TO PUT
+                    <span>YOUR BUSINESS ONLINE?</span>
+                </h2>
+
+                <p class="contact-description">
+                    Tell me what your business does. I'll help turn it into a
+                    professional web presence designed around your business.
+                </p>
+
+                <div class="contact-actions">
+
+                    <a href="https://wa.me/919833994143?text=Hi%20Muhammad%2C%20I%20want%20to%20build%20a%20website%20for%20my%20business.%20Please%20share%20the%20details."
+                       class="btn btn-primary whatsapp-link">
+                        CHAT ON WHATSAPP
+                        <span class="btn-arrow">↗</span>
+                    </a>
+
+                    <a href="mailto:MuhammadAliKhan089728@gmail.com"
+                       class="btn">
+                        SEND AN EMAIL
+                        <span class="btn-arrow">↗</span>
+                    </a>
+
+                </div>
+
+                <div class="contact-details">
+
+                    <a href="tel:+919833994143">
+                        +91 9833994143
+                    </a>
+
+                    <a href="mailto:MuhammadAliKhan089728@gmail.com">
+                        MuhammadAliKhan089728@gmail.com
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+<!-- ======================================================
+     FOOTER
+====================================================== -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-top">
+
+            <div>
+                <div class="footer-brand">
+                    Muhammad Ali Khan
+                </div>
+
+                <div class="footer-sub">
+                    Premium Websites for Modern Businesses.
+                </div>
+            </div>
+
+            <nav class="footer-links">
+                <a href="#home">HOME</a>
+                <a href="#services">SERVICES</a>
+                <a href="#work">WORK</a>
+                <a href="#process">PROCESS</a>
+                <a href="#contact">CONTACT</a>
+            </nav>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 Muhammad Ali Khan. All rights reserved.
+            </span>
+
+            <span>
+                PREMIUM WEB EXPERIENCES
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+
+<a
+    href="https://wa.me/919833994143?text=Hi%20Muhammad%2C%20I%20want%20to%20build%20a%20website%20for%20my%20business.%20Please%20share%20the%20details."
+    class="whatsapp-float whatsapp-link"
+    aria-label="Chat on WhatsApp"
+>
+
+    <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="none">
+        <path d="M20.52 3.48A11.82 11.82 0 0 0 12.09 0C5.54 0 .2 5.34.2 11.89c0 2.09.55 4.13 1.59 5.92L.1 24l6.33-1.66a11.88 11.88 0 0 0 5.65 1.43h.01c6.55 0 11.89-5.34 11.89-11.89a11.8 11.8 0 0 0-3.46-8.4ZM12.09 21.77a9.85 9.85 0 0 1-5.02-1.37l-.36-.21-3.76.99 1-3.67-.23-.38a9.85 9.85 0 1 1 8.37 4.64Zm5.4-7.39c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.09 4.49.71.31 1.26.49 1.69.63.71.23 1.35.2 1.86.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z" fill="currentColor"/>
+    </svg>
+
+</a>
+
+<button class="sound-toggle" id="soundToggle">
+    SOUND OFF
+</button>
+
+<!-- ======================================================
+     SCRIPTS
+====================================================== -->
+
+<script>
+/* =========================================================
+   UTILITIES
+========================================================= */
+
+const $ = selector => document.querySelector(selector);
+const $$ = selector => [...document.querySelectorAll(selector)];
+
+const reducedMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+const nav = $("#nav");
+const menuToggle = $("#menuToggle");
+const mobileMenu = $("#mobileMenu");
+
+window.addEventListener("scroll", () => {
+    nav.classList.toggle("scrolled", window.scrollY > 50);
+}, {passive:true});
+
+menuToggle.addEventListener("click", () => {
+
+    const open = mobileMenu.classList.toggle("open");
+
+    menuToggle.classList.toggle("active", open);
+    document.body.classList.toggle("menu-open", open);
+
+});
+
+$$(".mobile-menu a").forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        mobileMenu.classList.remove("open");
+        menuToggle.classList.remove("active");
+        document.body.classList.remove("menu-open");
+
+    });
+
+});
+
+
+/* =========================================================
+   SMOOTH ANCHOR SCROLL
+========================================================= */
+
+$$('a[href^="#"]').forEach(link => {
+
+    link.addEventListener("click", event => {
+
+        const target = document.querySelector(link.getAttribute("href"));
+
+        if(!target) return;
+
+        event.preventDefault();
+
+        const offset = nav.offsetHeight + 10;
+
+        window.scrollTo({
+            top: target.getBoundingClientRect().top +
+                 window.scrollY -
+                 offset,
+            behavior: reducedMotion ? "auto" : "smooth"
+        });
+
+    });
+
+});
+
+
+/* =========================================================
+   SCROLL PROGRESS
+========================================================= */
+
+const progress = $("#scrollProgress");
+
+function updateScrollProgress(){
+
+    const scrollTop = window.scrollY;
+    const height =
+        document.documentElement.scrollHeight -
+        window.innerHeight;
+
+    const percentage =
+        height > 0 ? scrollTop / height * 100 : 0;
+
+    progress.style.width = percentage + "%";
+
+}
+
+window.addEventListener("scroll",updateScrollProgress,{passive:true});
+updateScrollProgress();
+
+
+/* =========================================================
+   REVEAL OBSERVER
+========================================================= */
+
+const revealObserver = new IntersectionObserver(
+    entries => {
+
+        entries.forEach(entry => {
+
+            if(entry.isIntersecting){
+
+                entry.target.classList.add("visible");
+                revealObserver.unobserve(entry.target);
+
+            }
+
+        });
+
+    },
+    {
+        threshold:.12,
+        rootMargin:"0px 0px -60px 0px"
+    }
+);
+
+$$(".reveal").forEach(element => revealObserver.observe(element));
+
+
+/* =========================================================
+   CUSTOM CURSOR
+========================================================= */
+
+if(
+    window.matchMedia("(pointer:fine)").matches &&
+    !reducedMotion
+){
+
+    const dot = $("#cursorDot");
+    const ring = $("#cursorRing");
+
+    let mouseX = innerWidth / 2;
+    let mouseY = innerHeight / 2;
+
+    let ringX = mouseX;
+    let ringY = mouseY;
+
+    window.addEventListener("mousemove",event => {
+
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+
+        dot.style.left = mouseX + "px";
+        dot.style.top = mouseY + "px";
+
+        dot.style.opacity = "1";
+        ring.style.opacity = "1";
+
+    },{passive:true});
+
+    function cursorLoop(){
+
+        ringX += (mouseX - ringX) * .16;
+        ringY += (mouseY - ringY) * .16;
+
+        ring.style.left = ringX + "px";
+        ring.style.top = ringY + "px";
+
+        requestAnimationFrame(cursorLoop);
+
+    }
+
+    cursorLoop();
+
+    $$("a,button,.project,.business-type").forEach(element => {
+
+        element.addEventListener("mouseenter",() => {
+            ring.classList.add("view");
+        });
+
+        element.addEventListener("mouseleave",() => {
+            ring.classList.remove("view");
+        });
+
+    });
+
+}
+
+
+/* =========================================================
+   MAGNETIC BUTTONS
+========================================================= */
+
+if(
+    window.matchMedia("(pointer:fine)").matches &&
+    !reducedMotion
+){
+
+    $$(".magnetic").forEach(button => {
+
+        button.addEventListener("mousemove",event => {
+
+            const rect = button.getBoundingClientRect();
+
+            const x =
+                (event.clientX - rect.left - rect.width / 2) * .16;
+
+            const y =
+                (event.clientY - rect.top - rect.height / 2) * .16;
+
+            button.style.transform =
+                `translate(${x}px,${y}px)`;
+
+        });
+
+        button.addEventListener("mouseleave",() => {
+            button.style.transform = "";
+        });
+
+    });
+
+}
+
+
+/* =========================================================
+   BUSINESS SELECTOR
+========================================================= */
+
+const businessData = {
+
+    Gym:{
+        title:"GYM",
+        description:
+        "An energetic, premium digital experience focused on memberships, training, facilities and direct enquiries.",
+        chip:"PERFORMANCE / ENERGY",
+        glow:"rgba(255,85,75,.24)"
+    },
+
+    Restaurant:{
+        title:"RESTAURANT",
+        description:
+        "An elegant experience for menus, ambience, location, reservations and the story behind your food.",
+        chip:"DINING / EXPERIENCE",
+        glow:"rgba(221,166,82,.25)"
+    },
+
+    Salon:{
+        title:"SALON",
+        description:
+        "A refined digital identity focused on services, atmosphere, pricing, appointments and visual presentation.",
+        chip:"BEAUTY / LUXURY",
+        glow:"rgba(207,106,184,.24)"
+    },
+
+    Shop:{
+        title:"SHOP",
+        description:
+        "A clear product-focused experience designed to introduce your products and make contacting your business simple.",
+        chip:"PRODUCT / DISCOVERY",
+        glow:"rgba(72,154,255,.25)"
+    },
+
+    Agency:{
+        title:"AGENCY",
+        description:
+        "A sophisticated digital presence built around services, projects, expertise and a strong professional identity.",
+        chip:"DIGITAL / STRATEGY",
+        glow:"rgba(111,93,255,.27)"
+    },
+
+    Creator:{
+        title:"CREATOR",
+        description:
+        "A personal digital home for your content, identity, links, collaborations and professional opportunities.",
+        chip:"CONTENT / IDENTITY",
+        glow:"rgba(165,94,255,.28)"
+    },
+
+    Professional:{
+        title:"PROFESSIONAL",
+        description:
+        "A clean and trustworthy experience that explains your expertise, services, credentials and contact options.",
+        chip:"TRUST / CLARITY",
+        glow:"rgba(63,201,186,.25)"
+    },
+
+    Other:{
+        title:"YOUR BUSINESS",
+        description:
+        "Whatever your business does, the experience can be structured around your customers, services and brand.",
+        chip:"CUSTOM / YOUR BRAND",
+        glow:"rgba(91,140,255,.25)"
+    }
+
+};
+
+const businessButtons = $$(".business-type");
+const businessPreview = $("#businessPreview");
+const businessTitle = $("#businessTitle");
+const businessDescription = $("#businessDescription");
+const businessChip = $("#businessChip");
+
+businessButtons.forEach(button => {
+
+    button.addEventListener("click",() => {
+
+        businessButtons.forEach(b => b.classList.remove("active"));
+        button.classList.add("active");
+
+        const data = businessData[button.dataset.type];
+
+        businessPreview.style.opacity = ".55";
+        businessPreview.style.transform = "scale(.985)";
+
+        setTimeout(() => {
+
+            businessTitle.textContent = data.title;
+            businessDescription.textContent = data.description;
+            businessChip.textContent = data.chip;
+
+            businessPreview.style.setProperty(
+                "--business-glow",
+                data.glow
+            );
+
+            const glow =
+                businessPreview.querySelector(":scope::before");
+
+            businessPreview.style.background =
+                `radial-gradient(circle at 75% 30%,${data.glow},transparent 30%),#080c16`;
+
+            businessPreview.style.opacity = "1";
+            businessPreview.style.transform = "scale(1)";
+
+        },180);
+
+    });
+
+});
+
+
+/* =========================================================
+   BEFORE / AFTER SCROLL TRANSFORMATION
+========================================================= */
+
+const transformStage = $("#transformStage");
+const transformAfter = $("#transformAfter");
+const transformDivider = $("#transformDivider");
+const transformHandle = $("#transformHandle");
+
+function updateTransformation(){
+
+    if(!transformStage) return;
+
+    const rect = transformStage.getBoundingClientRect();
+
+    const viewport = window.innerHeight;
+
+    const progress =
+        Math.min(
+            1,
+            Math.max(
+                0,
+                (viewport * .82 - rect.top) /
+                (rect.height + viewport * .35)
+            )
+        );
+
+    const value =
+        35 + progress * 30;
+
+    transformAfter.style.clipPath =
+        `inset(0 ${100-value}% 0 0)`;
+
+    transformDivider.style.left = value + "%";
+    transformHandle.style.left = value + "%";
+
+}
+
+window.addEventListener("scroll",updateTransformation,{passive:true});
+window.addEventListener("resize",updateTransformation);
+updateTransformation();
+
+
+/* =========================================================
+   PROCESS PROGRESS
+========================================================= */
+
+const processSection = $(".process");
+const processProgress = $("#processProgress");
+const processSteps = $$(".process-step");
+
+function updateProcess(){
+
+    if(!processSection) return;
+
+    const rect = processSection.getBoundingClientRect();
+
+    const start = window.innerHeight * .25;
+    const end = window.innerHeight * .75;
+
+    let value =
+        (start - rect.top) /
+        (rect.height - (start + end));
+
+    value = Math.max(0,Math.min(1,value));
+
+    processProgress.style.height =
+        (value * 100) + "%";
+
+    processSteps.forEach((step,index) => {
+
+        const stepRect = step.getBoundingClientRect();
+
+        if(stepRect.top < window.innerHeight * .55){
+
+            step.classList.add("active");
+
+        }
+
+    });
+
+}
+
+window.addEventListener("scroll",updateProcess,{passive:true});
+window.addEventListener("resize",updateProcess);
+updateProcess();
+
+
+/* =========================================================
+   3D WEBGL HERO
+========================================================= */
+
+const canvas = $("#webgl");
+
+let renderer = null;
+let scene = null;
+let camera = null;
+let sculpture = null;
+let particles = null;
+
+let pointerX = 0;
+let pointerY = 0;
+let scrollRotation = 0;
+
+const mobile =
+    window.innerWidth < 700;
+
+function loadThree(){
+
+    const script = document.createElement("script");
+
+    script.src =
+        "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
+
+    script.onload = initThree;
+
+    script.onerror = () => {
+        createCssFallback();
+    };
+
+    document.head.appendChild(script);
+
+}
+
+function createCssFallback(){
+
+    canvas.style.display = "none";
+
+    const fallback = document.createElement("div");
+
+    fallback.style.cssText = `
+        position:absolute;
+        width:min(62vw,520px);
+        height:min(62vw,520px);
+        right:4%;
+        top:50%;
+        transform:translateY(-50%);
+        border-radius:50%;
+        border:1px solid rgba(130,150,255,.15);
+        background:
+            radial-gradient(circle at 35% 30%,rgba(164,180,255,.22),transparent 22%),
+            radial-gradient(circle at 70% 65%,rgba(110,82,255,.2),transparent 35%),
+            radial-gradient(circle,rgba(72,98,255,.09),transparent 67%);
+        box-shadow:
+            inset -30px -30px 100px rgba(77,72,255,.08),
+            0 0 100px rgba(78,103,255,.08);
+        animation:fallbackFloat 8s ease-in-out infinite;
+    `;
+
+    document.querySelector(".hero-canvas").appendChild(fallback);
+
+    const style = document.createElement("style");
+
+    style.textContent = `
+        @keyframes fallbackFloat{
+            0%,100%{
+                transform:translateY(-50%) rotate(0deg);
+            }
+            50%{
+                transform:translateY(calc(-50% - 16px)) rotate(8deg);
+            }
+        }
+        @media(max-width:700px){
+            .hero-canvas > div{
+                width:90vw!important;
+                height:90vw!important;
+                right:-30%!important;
+                top:42%!important;
+            }
+        }
+    `;
+
+    document.head.appendChild(style);
+
+}
+
+function initThree(){
+
+    if(!window.THREE){
+        createCssFallback();
+        return;
+    }
+
+    try{
+
+        scene = new THREE.Scene();
+
+        camera = new THREE.PerspectiveCamera(
+            40,
+            window.innerWidth/window.innerHeight,
+            .1,
+            100
+        );
+
+        camera.position.set(0,0,7);
+
+        renderer = new THREE.WebGLRenderer({
+            canvas,
+            alpha:true,
+            antialias:!mobile,
+            powerPreference:"high-performance"
+        });
+
+        renderer.setPixelRatio(
+            Math.min(window.devicePixelRatio,mobile ? 1.25 : 1.7)
+        );
+
+        renderer.setSize(
+            window.innerWidth,
+            window.innerHeight
+        );
+
+        renderer.outputEncoding =
+            THREE.sRGBEncoding;
+
+        /* ---------------------------
+           MAIN SCULPTURE
+        --------------------------- */
+
+        sculpture = new THREE.Group();
+
+        const geometry =
+            new THREE.IcosahedronGeometry(
+                mobile ? 1.35 : 1.7,
+                2
+            );
+
+        const material =
+            new THREE.MeshPhysicalMaterial({
+                color:0x7f8fff,
+                metalness:.85,
+                roughness:.19,
+                transmission:.12,
+                transparent:true,
+                opacity:.93,
+                clearcoat:1,
+                clearcoatRoughness:.12
+            });
+
+        const mesh =
+            new THREE.Mesh(geometry,material);
+
+        sculpture.add(mesh);
+
+        /* inner object */
+
+        const innerGeometry =
+            new THREE.IcosahedronGeometry(
+                mobile ? .9 : 1.15,
+                1
+            );
+
+        const innerMaterial =
+            new THREE.MeshBasicMaterial({
+                color:0x7c70ff,
+                wireframe:true,
+                transparent:true,
+                opacity:.17
+            });
+
+        const inner =
+            new THREE.Mesh(
+                innerGeometry,
+                innerMaterial
+            );
+
+        sculpture.add(inner);
+
+        /* rings */
+
+        for(let i=0;i<3;i++){
+
+            const ring =
+                new THREE.Mesh(
+                    new THREE.TorusGeometry(
+                        2.0 + i*.25,
+                        .006,
+                        8,
+                        100
+                    ),
+                    new THREE.MeshBasicMaterial({
+                        color:
+                            i===1 ? 0x6e7fff : 0x8d74ff,
+                        transparent:true,
+                        opacity:.18 - i*.035
+                    })
+                );
+
+            ring.rotation.x =
+                Math.PI/2.5 + i*.35;
+
+            ring.rotation.y =
+                i*.7;
+
+            sculpture.add(ring);
+
+        }
+
+        sculpture.position.set(
+            window.innerWidth < 700 ? .5 : 1.7,
+            .1,
+            0
+        );
+
+        scene.add(sculpture);
+
+        /* ---------------------------
+           LIGHTING
+        --------------------------- */
+
+        const ambient =
+            new THREE.AmbientLight(
+                0x8795ff,
+                .45
+            );
+
+        scene.add(ambient);
+
+        const light1 =
+            new THREE.PointLight(
+                0x627aff,
+                9,
+                12
+            );
+
+        light1.position.set(3,3,4);
+
+        scene.add(light1);
+
+        const light2 =
+            new THREE.PointLight(
+                0x9d62ff,
+                7,
+                10
+            );
+
+        light2.position.set(-3,-2,2);
+
+        scene.add(light2);
+
+        /* ---------------------------
+           PARTICLES
+        --------------------------- */
+
+        const count = mobile ? 280 : 650;
+
+        const positions =
+            new Float32Array(count*3);
+
+        for(let i=0;i<count;i++){
+
+            positions[i*3] =
+                (Math.random()-.5)*13;
+
+            positions[i*3+1] =
+                (Math.random()-.5)*8;
+
+            positions[i*3+2] =
+                (Math.random()-.5)*7;
+
+        }
+
+        const particleGeometry =
+            new THREE.BufferGeometry();
+
+        particleGeometry.setAttribute(
+            "position",
+            new THREE.BufferAttribute(
+                positions,
+                3
+            )
+        );
+
+        const particleMaterial =
+            new THREE.PointsMaterial({
+                color:0x9daaff,
+                size:mobile ? .018 : .025,
+                transparent:true,
+                opacity:.42,
+                depthWrite:false
+            });
+
+        particles =
+            new THREE.Points(
+                particleGeometry,
+                particleMaterial
+            );
+
+        scene.add(particles);
+
+        window.addEventListener(
+            "resize",
+            resizeThree
+        );
+
+        if(!reducedMotion){
+
+            window.addEventListener(
+                "pointermove",
+                event => {
+
+                    pointerX =
+                        (event.clientX /
+                        window.innerWidth - .5);
+
+                    pointerY =
+                        (event.clientY /
+                        window.innerHeight - .5);
+
+                },
+                {passive:true}
+            );
+
+        }
+
+        animateThree();
+
+    }catch(error){
+
+        console.warn("WebGL unavailable",error);
+
+        createCssFallback();
+
+    }
+
+}
+
+function resizeThree(){
+
+    if(!renderer || !camera) return;
+
+    camera.aspect =
+        window.innerWidth /
+        window.innerHeight;
+
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(
+        window.innerWidth,
+        window.innerHeight
+    );
+
+    renderer.setPixelRatio(
+        Math.min(
+            window.devicePixelRatio,
+            window.innerWidth < 700 ? 1.25 : 1.7
+        )
+    );
+
+}
+
+function animateThree(){
+
+    if(!renderer || !scene || !camera) return;
+
+    const time =
+        performance.now() * .00035;
+
+    if(!reducedMotion && sculpture){
+
+        sculpture.rotation.y +=
+            .0018 +
+            pointerX * .001;
+
+        sculpture.rotation.x =
+            pointerY * .15;
+
+        sculpture.position.y =
+            .08 + Math.sin(time*4)*.09;
+
+        sculpture.rotation.z =
+            scrollRotation * .22;
+
+    }
+
+    if(particles && !reducedMotion){
+
+        particles.rotation.y =
+            time * .14 +
+            pointerX*.05;
+
+        particles.rotation.x =
+            pointerY*.03;
+
+    }
+
+    renderer.render(scene,camera);
+
+    requestAnimationFrame(animateThree);
+
+}
+
+if(!reducedMotion){
+
+    window.addEventListener(
+        "scroll",
+        () => {
+
+            scrollRotation =
+                window.scrollY * .0009;
+
+        },
+        {passive:true}
+    );
+
+}
+
+loadThree();
+
+
+/* =========================================================
+   WORLD PARALLAX
+========================================================= */
+
+const worldGlows = $$(".world-glow");
+
+function updateWorld(){
+
+    if(reducedMotion) return;
+
+    const y = window.scrollY;
+
+    worldGlows.forEach((glow,index) => {
+
+        const speed =
+            [.018,-.012,.009][index];
+
+        glow.style.transform =
+            `translate3d(${pointerX * 25}px,${y * speed}px,0)`;
+
+    });
+
+}
+
+let pointerWorldX = 0;
+
+window.addEventListener(
+    "pointermove",
+    event => {
+
+        pointerWorldX =
+            event.clientX / window.innerWidth - .5;
+
+        if(!reducedMotion){
+
+            worldGlows.forEach((glow,index) => {
+
+                glow.style.transform =
+                    `translate3d(${pointerWorldX * 35}px,${window.scrollY * [.018,-.012,.009][index]}px,0)`;
+
+            });
+
+        }
+
+    },
+    {passive:true}
+);
+
+window.addEventListener(
+    "scroll",
+    updateWorld,
+    {passive:true}
+);
+
+
+/* =========================================================
+   PROJECT PARALLAX
+========================================================= */
+
+if(!reducedMotion){
+
+    const projects = $$(".project-preview");
+
+    function updateProjects(){
+
+        projects.forEach(project => {
+
+            const rect =
+                project.getBoundingClientRect();
+
+            const center =
+                rect.top + rect.height/2;
+
+            const distance =
+                (center - window.innerHeight/2) /
+                window.innerHeight;
+
+            const browser =
+                project.querySelector(".mock-browser");
+
+            if(browser){
+
+                const rotation =
+                    Math.max(
+                        -3,
+                        Math.min(3,distance*2)
+                    );
+
+                const movement =
+                    Math.max(
+                        -12,
+                        Math.min(12,-distance*8)
+                    );
+
+                browser.style.transform =
+                    `rotateX(${rotation}deg) rotateY(${-rotation}deg) translateY(${movement}px)`;
+
+            }
+
+        });
+
+    }
+
+    window.addEventListener(
+        "scroll",
+        updateProjects,
+        {passive:true}
+    );
+
+    updateProjects();
+
+}
+
+
+/* =========================================================
+   SUBTLE UI SOUND SYSTEM
+========================================================= */
+
+let audioContext = null;
+let soundEnabled = false;
+
+const soundToggle = $("#soundToggle");
+
+function initAudio(){
+
+    if(!audioContext){
+
+        audioContext =
+            new (
+                window.AudioContext ||
+                window.webkitAudioContext
+            )();
+
+    }
+
+    if(audioContext.state === "suspended"){
+        audioContext.resume();
+    }
+
+}
+
+function playTone(
+    frequency=500,
+    duration=.045,
+    volume=.018
+){
+
+    if(!soundEnabled) return;
+
+    try{
+
+        initAudio();
+
+        const oscillator =
+            audioContext.createOscillator();
+
+        const gain =
+            audioContext.createGain();
+
+        oscillator.type = "sine";
+
+        oscillator.frequency.setValueAtTime(
+            frequency,
+            audioContext.currentTime
+        );
+
+        gain.gain.setValueAtTime(
+            volume,
+            audioContext.currentTime
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+            .001,
+            audioContext.currentTime + duration
+        );
+
+        oscillator.connect(gain);
+        gain.connect(audioContext.destination);
+
+        oscillator.start();
+        oscillator.stop(
+            audioContext.currentTime + duration
+        );
+
+    }catch(error){}
+
+}
+
+soundToggle.addEventListener("click",() => {
+
+    soundEnabled = !soundEnabled;
+
+    if(soundEnabled){
+
+        initAudio();
+
+        soundToggle.textContent =
+            "SOUND ON";
+
+        soundToggle.classList.add("active");
+
+        playTone(620,.08,.025);
+
+    }else{
+
+        soundToggle.textContent =
+            "SOUND OFF";
+
+        soundToggle.classList.remove("active");
+
+    }
+
+});
+
+$$("a,button").forEach(element => {
+
+    element.addEventListener(
+        "mouseenter",
+        () => playTone(520,.025,.009)
+    );
+
+    element.addEventListener(
+        "click",
+        () => playTone(680,.045,.016)
+    );
+
+});
+
+
+/* =========================================================
+   WHATSAPP LINK SAFETY / FEEDBACK
+========================================================= */
+
+$$(".whatsapp-link").forEach(link => {
+
+    link.addEventListener("click",() => {
+
+        playTone(720,.06,.02);
+
+    });
+
+});
+
+
+/* =========================================================
+   PERFORMANCE: PAUSE 3D WHEN TAB HIDDEN
+========================================================= */
+
+document.addEventListener(
+    "visibilitychange",
+    () => {
+
+        if(document.hidden){
+
+            /* Three.js requestAnimationFrame naturally
+               becomes throttled by the browser. */
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   IMAGELESS / NO-ASSET DESIGN
+========================================================= */
+
+/*
+   This website intentionally uses CSS/Canvas-generated
+   visuals rather than external stock images.
+
+   Benefits:
+   - no broken image URLs
+   - faster initial rendering
+   - no copyright/image dependency
+   - completely self-contained visual direction
+*/
+
+
+/* =========================================================
+   INITIALIZATION
+========================================================= */
+
+window.addEventListener("load",() => {
+
+    document.body.classList.add("loaded");
+
+    updateScrollProgress();
+    updateTransformation();
+    updateProcess();
+    updateWorld();
+
+});
+
+</script>
+
+</body>
+</html>
